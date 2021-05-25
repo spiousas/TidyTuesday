@@ -16,7 +16,7 @@ annotations <- tibble(year = c(1999.7, 2019.3),
                       n = c(3000, -2000),
                       hjust = c(0, 1),
                       vjust = c(0, 1),
-                      label = c(paste0("Mario Kart gains popularity in,",
+                      label = c(paste0("Mario Kart gains popularity in ",
                                        "<b style='color:#FFCD00;'>Australia</b>"),
                                 paste0("Covid Pandemics motivated people to play Mario Kart 64 again, ",
                                        "specially in <b style='color:#B80E3C;'>North America</b>"))
@@ -34,7 +34,7 @@ records <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesd
   group_by(year, quarter, type, nation) %>%
   summarise(n = n(),
             date = min(date)) %>%
-  mutate(n = if_else(type == "Single Lap", n, -n)) %>%
+  mutate(n = if_else(type == "Single Lap", n, -n))
 
 # Plot
 ggplot(data = records, aes(x = year,
@@ -49,6 +49,8 @@ ggplot(data = records, aes(x = year,
                fill = "gray60") +
   geom_col(data = records %>% filter(type == "Single Lap")) +
   geom_col(data = records %>% filter(type == "Three Lap"),) +
+  geom_hline(yintercept = 0,
+             color = "white") +
   scale_y_continuous(labels = abs(seq(-5000,5000,2500)),
                      breaks= seq(-5000,5000,2500),
                      limits = c(-5000, 5000)) +
@@ -80,3 +82,5 @@ ggplot(data = records, aes(x = year,
         panel.background = element_rect(fill = "#636C71"),
         plot.caption.position = 'plot',
         plot.title.position = 'plot')
+
+ggsave("../img.png", dpi = 300, width = 20, height = 15, units = "cm")
