@@ -22,6 +22,9 @@ annotations <- tibble(year = c(1999.7, 2019.3),
                                        "specially in <b style='color:#B80E3C;'>North America</b>"))
 )
 
+# Dirvers data
+drivers <- readr::read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-05-25/drivers.csv')
+
 # Records data
 records <- read_csv('https://raw.githubusercontent.com/rfordatascience/tidytuesday/master/data/2021/2021-05-25/records.csv') %>%
   inner_join(drivers %>% select(player, nation), by = "player") %>%
