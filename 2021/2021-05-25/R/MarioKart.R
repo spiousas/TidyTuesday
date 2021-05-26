@@ -59,7 +59,7 @@ ggplot(data = records, aes(x = year,
                      limits = c(-5000, 5000)) +
   scale_fill_manual(values = c("#B80E3C", "#FFCD00", "#003399"),
                      breaks = unique(records$nation)) +
-  annotation_custom(img, 
+  annotation_custom(img_logo, 
                     ymin = 3000, ymax = 5000,
                     xmin = 2015, xmax = 2021) +
   theme_fivethirtyeight() +
